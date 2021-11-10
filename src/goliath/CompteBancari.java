@@ -6,6 +6,7 @@
 package goliath;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,7 +19,7 @@ public class CompteBancari {
     Scanner sc = new Scanner(System.in);
     private String iban, nomTitular;
     private int saldo;
-    private List <Movimiento> historicoMovimientos;
+    private List<Movimiento> historicoMovimientos;
 
     //contructor 
     public CompteBancari(String iban, String nomTitular) {
@@ -48,10 +49,27 @@ public class CompteBancari {
         int cantidad = nuevoMovimiento.getCantidad();
         saldo = saldo + cantidad;
         if (cantidad >= 3000) {
-            System.out.println("Avis, notificacion a hacienda");
+            System.out.println("Aviso, notificacion a hacienda");
         }
         historicoMovimientos.add(nuevoMovimiento);
 
     }
+
+    public void retirada(Movimiento nuevoMovimiento) {
+        int cantidad = nuevoMovimiento.getCantidad();
+
+        if (saldo - cantidad <= -50) {
+            System.out.println("Aviso, Saldo negativo");
+        } else if (cantidad >= 3000) {
+            saldo = saldo - cantidad;
+            System.out.println("Aviso, notificacion a hacienda");
+        } else {
+            saldo = saldo - cantidad;
+        }
+        historicoMovimientos.add(nuevoMovimiento);
+
+    }
+    
+    
 
 }

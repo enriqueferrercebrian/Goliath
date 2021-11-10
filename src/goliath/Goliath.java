@@ -7,7 +7,10 @@ package goliath;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -30,67 +33,95 @@ public class Goliath {
         iban = sc.nextLine();
         System.out.println("dime nombre");
         nomTitular = sc.nextLine();
+        boolean seguir = true;
 
         //revisar iban que este correcto
         CompteBancari nuevaCuenta = new CompteBancari(iban, nomTitular);
+        while (seguir == true) {
+            System.out.println("Que quieres hacer?");
+            System.out.println("1");
+            System.out.println("2");
+            System.out.println("3");
+            System.out.println("4");
+            System.out.println("5");
+            System.out.println("6");
+            System.out.println("7");
+            System.out.println("8");
+            respuestaUsuario = Integer.parseInt(sc.nextLine());
 
-        System.out.println("Que quieres hacer?");
-        System.out.println("1");
-        System.out.println("2");
-        System.out.println("3");
-        System.out.println("4");
-        System.out.println("5");
-        System.out.println("6");
-        System.out.println("7");
-        System.out.println("8");
-        respuestaUsuario = Integer.parseInt(sc.nextLine());
+            switch (respuestaUsuario) {
 
-        switch (respuestaUsuario) {
+                case 1:
 
-            case 1:
+                    System.out.println(nuevaCuenta.getIban() + " "
+                            + nuevaCuenta.getNomTitular() + " "
+                            + " " + nuevaCuenta.getSaldo());
+                    break;
 
-                System.out.println(nuevaCuenta.getIban() + " "
-                        + nuevaCuenta.getNomTitular() + " "
-                        + " " + nuevaCuenta.getSaldo());
+                case 2:
 
-            case 2:
+                    System.out.println(nuevaCuenta.getIban());
+                    break;
 
-                System.out.println(nuevaCuenta.getIban());
+                case 3:
 
-            case 3:
+                    System.out.println(nuevaCuenta.getNomTitular());
+                    break;
 
-                System.out.println(nuevaCuenta.getNomTitular());
+                case 4:
 
-            case 4:
+                    System.out.println(nuevaCuenta.getSaldo());
+                    break;
 
-                System.out.println(nuevaCuenta.getSaldo());
+                case 5:
+                    System.out.println("Cuanto?");
+                    cantidad = Integer.parseInt(sc.nextLine());
 
-            case 5:
-                System.out.println("Cuanto?");
-                cantidad = Integer.parseInt(sc.nextLine());
-                
-                System.out.println("quien?");
-                remitente = sc.nextLine();
-                
-                System.out.println("Concepto?");
-                concepto = sc.nextLine();
-                
-                fecha = Calendar.getInstance().getTime();
+                    System.out.println("quien?");
+                    remitente = sc.nextLine();
 
-                Movimiento nuevoMovimiento = new Movimiento(cantidad, remitente, concepto, fecha);
-                
-                nuevaCuenta.ingreso(cantidad);
-                
-               nuevaCuenta.getHistoricoMovimientos()
-                
-            case 6:
+                    System.out.println("Concepto?");
+                    concepto = sc.nextLine();
 
-            case 7:
+                    fecha = Calendar.getInstance().getTime();
 
-            case 8:
+                    Movimiento nuevoIngreso = new Movimiento(cantidad, remitente, concepto, fecha);
+
+                    nuevaCuenta.ingreso(nuevoIngreso);
+
+                    break;
+
+                case 6:
+
+                    System.out.println("Cuanto?");
+                    cantidad = Integer.parseInt(sc.nextLine());
+
+                    System.out.println("quien?");
+                    remitente = sc.nextLine();
+
+                    System.out.println("Concepto?");
+                    concepto = sc.nextLine();
+
+                    fecha = Calendar.getInstance().getTime();
+
+                    Movimiento nuevaRetirada = new Movimiento(cantidad, remitente, concepto, fecha);
+
+                    nuevaCuenta.retirada(nuevaRetirada);
+
+                    break;
+
+                case 7:
+                    
+                    List<Movimiento> lista = nuevaCuenta.getHistoricoMovimientos();
+                    
+                    
+                        System.out.println(lista.toString());
+
+                    
+                case 8:
+                    seguir = false;
+            }
 
         }
-
     }
-
 }
