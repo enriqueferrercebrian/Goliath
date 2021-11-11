@@ -51,25 +51,27 @@ public class CompteBancari {
         if (cantidad >= 3000) {
             System.out.println("Aviso, notificacion a hacienda");
         }
+        
         historicoMovimientos.add(nuevoMovimiento);
 
     }
 
     public void retirada(Movimiento nuevoMovimiento) {
         int cantidad = nuevoMovimiento.getCantidad();
-
+       
         if (saldo - cantidad <= -50) {
             System.out.println("Aviso, Saldo negativo");
         } else if (cantidad >= 3000) {
             saldo = saldo - cantidad;
             System.out.println("Aviso, notificacion a hacienda");
+            historicoMovimientos.add(nuevoMovimiento);
+
         } else {
             saldo = saldo - cantidad;
+            historicoMovimientos.add(nuevoMovimiento);
+
         }
-        historicoMovimientos.add(nuevoMovimiento);
 
     }
-    
-    
 
 }

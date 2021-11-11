@@ -17,14 +17,15 @@ public class Movimiento {
     //Atributos
     private int cantidad;
     private Date fecha;
-    private String concepto, remitente;
-      
+    private String concepto, remitente, tipoMovimiento;
+
     //constructor
-    public Movimiento(int cantidad,String remitente, String concepto, Date fecha) {
+    public Movimiento(String tipoMovimiento, int cantidad, String remitente, String concepto, Date fecha) {
+        this.tipoMovimiento = tipoMovimiento;
         this.cantidad = cantidad;
+        this.remitente = remitente;
         this.concepto = concepto;
         this.fecha = fecha;
-        this.remitente  = remitente;
 
     }
 
@@ -43,8 +44,9 @@ public class Movimiento {
     public String getRemitente() {
         return remitente;
     }
-    
-    
-    
-    
+
+    public String getTipoMovimiento() {
+        return tipoMovimiento;
+    }
+
 }
